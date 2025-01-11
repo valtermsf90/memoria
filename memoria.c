@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include "pico/stdlib.h"
+#include <time.h>
 
 #define LED_R 13
 #define LED_B 12
@@ -104,9 +105,8 @@ void enigma(){
 srand(time(NULL));
 // Gerar um número aleatório entre 1 e 100 (inclusive)
 int numeroAleatorio = rand() % 100 + 1; 
-
 for(int i = 0;i < tamanho; i++){
-    if(numeroAleatorio % 3){
+    if(numeroAleatorio % 2){
         segredo[i] = 'B';
     }else{
         segredo[i] = 'A';
