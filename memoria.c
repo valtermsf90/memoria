@@ -113,7 +113,7 @@ void mostrarEnigma(){
         if(segredo[i] == 'A'){
             gpio_put(LED_B, 1);
             sleep_ms(500);
-            gpio_put(LED_B, 0)
+            gpio_put(LED_B, 0);
         }else if(segredo[i] == 'B'){
             gpio_put(LED_R, 1);
             gpio_put(LED_B, 0);
