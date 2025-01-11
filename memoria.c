@@ -101,8 +101,12 @@ gpio_put(LED_G, 0);
 sleep_ms(2000);
 }
 void enigma(){
+srand(time(NULL));
+// Gerar um número aleatório entre 1 e 100 (inclusive)
+int numeroAleatorio = rand() % 100 + 1; 
+
 for(int i = 0;i < tamanho; i++){
-    if(i % 3){
+    if(numeroAleatorio % 3){
         segredo[i] = 'B';
     }else{
         segredo[i] = 'A';
