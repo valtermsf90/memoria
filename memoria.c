@@ -10,7 +10,7 @@
 #define BUTTON_A 5
 #define BUTTON_B 6
 
-int tamanho = 10;
+int tamanho = 2;
 char segredo[10];
 char botao;
 bool acerto;
@@ -176,7 +176,8 @@ while (acerto && i < 10) {
             sleep_ms(200);
             gpio_put(LED_G, 0);
             i++;
-            if(i == 10){
+            if(i == tamanho){
+                tamanho = tamanho + 2;
                 for(int x = 0; x < 10; x++){
                 gpio_put(LED_G, 1);
                 sleep_ms(200);
