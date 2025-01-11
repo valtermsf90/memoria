@@ -109,51 +109,51 @@ void enigma(){
 }
 
 int main() {
-    stdio_init_all();
-    iniciaComponentes();
-    enigma();
-    while (true) { 
-        acerto = true; 
-        int i = 0;     
-        luzInicial();
+stdio_init_all();
+iniciaComponentes();
+enigma();
+while (true) { 
+    acerto = true; 
+    int i = 0;     
+    luzInicial();
 
-        while (acerto && i < 10) {
-            char botao = '\0';
-            if(gpio_get(BUTTON_A) == 0){
+    while (acerto && i < 10) {
+        char botao = '\0';
+        if(gpio_get(BUTTON_A) == 0){
             gpio_put(LED_B, 1);
             botao = 'A';
             sleep_ms(100);
             gpio_put(LED_B, 0);
-            }else if(gpio_get(BUTTON_B) == 0){
+        }else if(gpio_get(BUTTON_B) == 0){
             gpio_put(LED_B, 1);
             botao = 'B';
             sleep_ms(100);
             gpio_put(LED_B, 0);
-            }
-            if (botao != '\0') {
+        }
+        if (botao != '\0') {
             if(botao == segredo[i]){
-            gpio_put(LED_G, 1);
-            sleep_ms(200);
-            gpio_put(LED_G, 0);
-            i++;
-            if(i == 10){
-            for(int x = 0; x < 10; x++){
-            gpio_put(LED_G, 1);
-            sleep_ms(200);
-            gpio_put(LED_G, 0);
-            sleep_ms(200);
-            }
-            }
+                gpio_put(LED_G, 1);
+                sleep_ms(200);
+                gpio_put(LED_G, 0);
+                i++;
+                if(i == 10){
+                    for(int x = 0; x < 10; x++){
+                    gpio_put(LED_G, 1);
+                    sleep_ms(200);
+                    gpio_put(LED_G, 0);
+                    sleep_ms(200);
+                    }
+                }
             }else{ 
-            for(int x = 0; x < 10; x++){
-            gpio_put(LED_R, 1);
-            sleep_ms(200);
-            gpio_put(LED_R, 0);
-            sleep_ms(200);
-            }
-            acerto = false;
-            }
+                for(int x = 0; x < 10; x++){
+                    gpio_put(LED_R, 1);
+                    sleep_ms(200);
+                    gpio_put(LED_R, 0);
+                    sleep_ms(200);
+                }
+                acerto = false;
             }
         }
-    }       
+    }
+}       
 }
