@@ -103,8 +103,8 @@ sleep_ms(2000);
 }
 void enigma(){
 srand(time(NULL));
-int numeroAleatorio = rand() % 100 + 1; 
 for(int i = 0;i < tamanho; i++){
+    int numeroAleatorio = rand() % 100 + 1; 
     if(numeroAleatorio % 2){
         segredo[i] = 'B';
     }else{
