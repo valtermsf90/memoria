@@ -9,6 +9,7 @@
 #define BUTTON_A 5
 #define BUTTON_B 6
 
+int tamanho = 10;
 char segredo[10];
 char botao;
 bool acerto;
@@ -99,13 +100,41 @@ gpio_put(LED_B, 0);
 gpio_put(LED_G, 0); 
 }
 void enigma(){
-for(int i = 0;i < 10; i++){
+for(int i = 0;i < tamanho; i++){
     if(i % 3){
         segredo[i] = 'B';
     }else{
         segredo[i] = 'A';
     }
     }
+}
+void mostrarEnigma(){
+    for(int i = 0; i< tamanho; i++){
+        if(segredo[i] == 'A'){
+            gpio_put(LED_B, 1);
+            sleep_ms(500);
+            gpio_put(LED_B, 0)
+        }else if(segredo[i] == 'B'){
+            gpio_put(LED_R, 1);
+            gpio_put(LED_B, 0);
+            gpio_put(LED_G, 1); 
+            sleep_ms(500);
+            gpio_put(LED_R, 0);
+            gpio_put(LED_B, 0);
+            gpio_put(LED_G, 0);
+        }
+    }
+gpio_put(BUZZER_A, 1);
+gpio_put(BUZZER_B, 1);
+gpio_put(LED_R, 1);  
+gpio_put(LED_B, 1); 
+gpio_put(LED_G, 1); 
+sleep_ms(300);
+gpio_put(BUZZER_A, 0);
+gpio_put(BUZZER_B, 0);
+gpio_put(LED_R, 0);  
+gpio_put(LED_B, 0); 
+gpio_put(LED_G, 0); 
 }
 
 int main() {
@@ -116,6 +145,7 @@ while (true) {
 acerto = true; 
 int i = 0;     
 luzInicial();
+mostrarEnigma();
 
 while (acerto && i < 10) {
     char botao = '\0';
@@ -125,10 +155,14 @@ while (acerto && i < 10) {
         sleep_ms(100);
         gpio_put(LED_B, 0);
     }else if(gpio_get(BUTTON_B) == 0){
-        gpio_put(LED_B, 1);
+        gpio_put(LED_R, 1);
+        gpio_put(LED_B, 0);
+        gpio_put(LED_G, 1); 
         botao = 'B';
         sleep_ms(100);
+        gpio_put(LED_R, 0);
         gpio_put(LED_B, 0);
+        gpio_put(LED_G, 0);
     }
     if (botao != '\0') {
         if(botao == segredo[i]){
