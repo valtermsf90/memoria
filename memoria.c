@@ -103,7 +103,6 @@ sleep_ms(2000);
 }
 void enigma(){
 srand(time(NULL));
-// Gerar um número aleatório entre 1 e 100 (inclusive)
 int numeroAleatorio = rand() % 100 + 1; 
 for(int i = 0;i < tamanho; i++){
     if(numeroAleatorio % 2){
