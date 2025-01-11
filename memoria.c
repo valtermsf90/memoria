@@ -10,7 +10,7 @@
 #define BUTTON_A 5
 #define BUTTON_B 6
 
-int tamanho = 2;
+int tamanho = 1;
 char segredo[10];
 char botao;
 bool acerto;
@@ -38,7 +38,7 @@ gpio_pull_up(BUTTON_B);
 void luzInicial(){
 
 //VERMELHO
-gpio_put(BUZZER_A, 1);
+//gpio_put(BUZZER_A, 1);
 gpio_put(BUZZER_B, 0);
 gpio_put(LED_R, 1); 
 gpio_put(LED_B, 0);  
@@ -47,14 +47,14 @@ sleep_ms(200);
 
 //CIANO
 gpio_put(BUZZER_A, 0);
-gpio_put(BUZZER_B, 1);
+//gpio_put(BUZZER_B, 1);
 gpio_put(LED_R, 0);  
 gpio_put(LED_B, 1); 
 gpio_put(LED_G, 1); 
 sleep_ms(200);
 
 //AMARELO
-gpio_put(BUZZER_A, 1);
+//gpio_put(BUZZER_A, 1);
 gpio_put(BUZZER_B, 0);
 gpio_put(LED_R, 1);
 gpio_put(LED_B, 0);
@@ -63,14 +63,14 @@ sleep_ms(200);
 
 //ROSA
 gpio_put(BUZZER_A, 0);
-gpio_put(BUZZER_B, 1);
+//gpio_put(BUZZER_B, 1);
 gpio_put(LED_R, 1); 
 gpio_put(LED_B, 1);  
 gpio_put(LED_G, 0);
 sleep_ms(200);
 
 //AZUL
-gpio_put(BUZZER_A, 1);
+//gpio_put(BUZZER_A, 1);
 gpio_put(BUZZER_B, 0);
 gpio_put(LED_R, 0); 
 gpio_put(LED_B, 1); 
@@ -79,14 +79,14 @@ sleep_ms(200);
 
 //VERDE
 gpio_put(BUZZER_A, 0);
-gpio_put(BUZZER_B, 1);
+//gpio_put(BUZZER_B, 1);
 gpio_put(LED_R, 0);  
 gpio_put(LED_B, 0); 
 gpio_put(LED_G, 1); 
 sleep_ms(200);
 
 //BRANCO
-gpio_put(BUZZER_A, 1);
+//gpio_put(BUZZER_A, 1);
 gpio_put(BUZZER_B, 0);
 gpio_put(LED_R, 1);  
 gpio_put(LED_B, 1); 
@@ -113,7 +113,7 @@ for(int i = 0;i < tamanho; i++){
     }
 }
 void mostrarEnigma(){
-    for(int i = 0; i< tamanho; i++){
+    for(int i = 0; i < tamanho; i++){
         if(segredo[i] == 'A'){
             gpio_put(LED_B, 1);
             sleep_ms(500);
@@ -146,14 +146,17 @@ gpio_put(LED_G, 0);
 int main() {
 stdio_init_all();
 iniciaComponentes();
+
 enigma();
-while (true) { 
+while (true) {
+tamanho++;
+enigma();
 acerto = true; 
 int i = 0;     
 luzInicial();
 mostrarEnigma();
 
-while (acerto && i < 10) {
+while (acerto && i < tamanho) {
     char botao = '\0';
     if(gpio_get(BUTTON_A) == 0){
         gpio_put(LED_B, 1);
@@ -177,15 +180,15 @@ while (acerto && i < 10) {
             gpio_put(LED_G, 0);
             i++;
             if(i == tamanho){
-                tamanho = tamanho + 2;
                 for(int x = 0; x < 10; x++){
                 gpio_put(LED_G, 1);
                 sleep_ms(200);
                 gpio_put(LED_G, 0);
                 sleep_ms(200);
                 }
+            
             }
-        }else{ 
+            }else{ 
             for(int x = 0; x < 10; x++){
                 gpio_put(LED_R, 1);
                 sleep_ms(200);
@@ -193,6 +196,7 @@ while (acerto && i < 10) {
                 sleep_ms(200);
             }
             acerto = false;
+            tamanho--;
         }
     }
 }
