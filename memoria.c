@@ -90,7 +90,7 @@ gpio_put(BUZZER_B, 0);
 gpio_put(LED_R, 1);  
 gpio_put(LED_B, 1); 
 gpio_put(LED_G, 1); 
-sleep_ms(3000);
+sleep_ms(1000);
 
 //TODOS APAGADOS
 gpio_put(BUZZER_A, 0);
@@ -98,6 +98,7 @@ gpio_put(BUZZER_B, 0);
 gpio_put(LED_R, 0); 
 gpio_put(LED_B, 0); 
 gpio_put(LED_G, 0); 
+sleep_ms(2000);
 }
 void enigma(){
 for(int i = 0;i < tamanho; i++){
