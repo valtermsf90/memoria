@@ -44,39 +44,31 @@ void mostrarEnigma()
         {
             azul();
             sleep_ms(500);
-            gpio_put(LED_B, 0);
+            apagar();
             sleep_ms(500);
         }
         else if (segredo[i] == 'B')
         {
             amarelo();
             sleep_ms(500);
-            gpio_put(LED_R, 0);
-            gpio_put(LED_B, 0);
-            gpio_put(LED_G, 0);
+            apagar();
             sleep_ms(500);
         }
         else if (segredo[i] == 'C')
         {
             rosa();
             sleep_ms(500);
-            gpio_put(LED_R, 0);
-            gpio_put(LED_B, 0);
-            gpio_put(LED_G, 0);
+            apagar();
             sleep_ms(500);
         }
     }
     gpio_put(BUZZER_A, 1);
     gpio_put(BUZZER_B, 1);
-    gpio_put(LED_R, 1);
-    gpio_put(LED_B, 1);
-    gpio_put(LED_G, 1);
+    branco();   
     sleep_ms(1000);
     gpio_put(BUZZER_A, 0);
     gpio_put(BUZZER_B, 0);
-    gpio_put(LED_R, 0);
-    gpio_put(LED_B, 0);
-    gpio_put(LED_G, 0);
+    apagar();
 }
 
 int main()
