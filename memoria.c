@@ -39,7 +39,6 @@ gpio_pull_up(BUTTON_B);
 gpio_init(BUTTON_J);
 gpio_set_dir(BUTTON_J, GPIO_IN);
 gpio_pull_up(BUTTON_J);
-
 }
 void luzInicial(){
 
@@ -164,45 +163,45 @@ int main() {
 stdio_init_all();
 iniciaComponentes();
 while (true) {
-tamanho = tamanho + 1;
-enigma();
-acerto = true; 
-int i = 0;     
-luzInicial();
-mostrarEnigma();
-while (acerto && i < tamanho) {
-    char botao = '\0';
-    if(gpio_get(BUTTON_A) == 0){
-        gpio_put(LED_B, 1);
-        botao = 'A';
-        sleep_ms(300);
-        gpio_put(LED_B, 0);
-        sleep_ms(300);
-    }else if(gpio_get(BUTTON_B) == 0){
-        gpio_put(LED_R, 1);
-        gpio_put(LED_B, 0);
-        gpio_put(LED_G, 1); 
-        botao = 'B';
-        sleep_ms(300);
-        gpio_put(LED_R, 0);
-        gpio_put(LED_B, 0);
-        gpio_put(LED_G, 0);
-        sleep_ms(300);
-    }else if(gpio_get(BUTTON_J) == 0){
-        gpio_put(LED_R, 1); 
-        gpio_put(LED_B, 1);  
-        gpio_put(LED_G, 0);
-        botao = 'C';
-        sleep_ms(300);
-        gpio_put(LED_R, 0);
-        gpio_put(LED_B, 0);
-        gpio_put(LED_G, 0);
-        sleep_ms(300);
-    }
-    if (botao != '\0') {
-        if(botao == segredo[i]){
-           /* gpio_put(LED_G, 1);
-            sleep_ms(200);
+    tamanho = tamanho + 1;
+    enigma();
+    acerto = true; 
+    int i = 0;     
+    luzInicial();
+    mostrarEnigma();
+    while (acerto && i < tamanho) {
+        char botao = '\0';
+        if(gpio_get(BUTTON_A) == 0){
+            gpio_put(LED_B, 1);
+            botao = 'A';
+            sleep_ms(300);
+            gpio_put(LED_B, 0);
+            sleep_ms(300);
+        }else if(gpio_get(BUTTON_B) == 0){
+            gpio_put(LED_R, 1);
+            gpio_put(LED_B, 0);
+            gpio_put(LED_G, 1); 
+            botao = 'B';
+            sleep_ms(300);
+            gpio_put(LED_R, 0);
+            gpio_put(LED_B, 0);
+            gpio_put(LED_G, 0);
+            sleep_ms(300);
+        }else if(gpio_get(BUTTON_J) == 0){
+            gpio_put(LED_R, 1); 
+            gpio_put(LED_B, 1);  
+            gpio_put(LED_G, 0);
+            botao = 'C';
+            sleep_ms(300);
+            gpio_put(LED_R, 0);
+            gpio_put(LED_B, 0);
+            gpio_put(LED_G, 0);
+            sleep_ms(300);
+        }
+        if (botao != '\0') {
+            if(botao == segredo[i]){
+            /* gpio_put(LED_G, 1);
+            sleep_ms(200);       CONFIRMAÇÃO DE BOTÃO CERTO COM LED VERDE
             gpio_put(LED_G, 0);*/
             i++;
             if(i == tamanho){
@@ -211,8 +210,7 @@ while (acerto && i < tamanho) {
                 sleep_ms(200);
                 gpio_put(LED_G, 0);
                 sleep_ms(200);
-                }
-            
+                }            
             }
             }else{ 
             for(int x = 0; x < 10; x++){
@@ -222,11 +220,10 @@ while (acerto && i < tamanho) {
                 sleep_ms(200);
             }
             acerto = false;
-            tamanho = 0;
-            
+            tamanho = 0;            
+            }
         }
     }
-}
 }       
 }
 
