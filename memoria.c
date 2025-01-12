@@ -153,7 +153,6 @@ acerto = true;
 int i = 0;     
 luzInicial();
 mostrarEnigma();
-
 while (acerto && i < tamanho) {
     char botao = '\0';
     if(gpio_get(BUTTON_A) == 0){
