@@ -164,7 +164,7 @@ int main() {
 stdio_init_all();
 iniciaComponentes();
 while (true) {
-tamanho = tamanho + 2;
+tamanho = tamanho + 1;
 enigma();
 acerto = true; 
 int i = 0;     
@@ -175,32 +175,35 @@ while (acerto && i < tamanho) {
     if(gpio_get(BUTTON_A) == 0){
         gpio_put(LED_B, 1);
         botao = 'A';
-        sleep_ms(100);
+        sleep_ms(300);
         gpio_put(LED_B, 0);
+        sleep_ms(300);
     }else if(gpio_get(BUTTON_B) == 0){
         gpio_put(LED_R, 1);
         gpio_put(LED_B, 0);
         gpio_put(LED_G, 1); 
         botao = 'B';
-        sleep_ms(100);
+        sleep_ms(300);
         gpio_put(LED_R, 0);
         gpio_put(LED_B, 0);
         gpio_put(LED_G, 0);
+        sleep_ms(300);
     }else if(gpio_get(BUTTON_J) == 0){
         gpio_put(LED_R, 1); 
         gpio_put(LED_B, 1);  
         gpio_put(LED_G, 0);
         botao = 'C';
-        sleep_ms(100);
+        sleep_ms(300);
         gpio_put(LED_R, 0);
         gpio_put(LED_B, 0);
         gpio_put(LED_G, 0);
+        sleep_ms(300);
     }
     if (botao != '\0') {
         if(botao == segredo[i]){
-            gpio_put(LED_G, 1);
+           /* gpio_put(LED_G, 1);
             sleep_ms(200);
-            gpio_put(LED_G, 0);
+            gpio_put(LED_G, 0);*/
             i++;
             if(i == tamanho){
                 for(int x = 0; x < 10; x++){
