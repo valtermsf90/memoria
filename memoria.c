@@ -24,7 +24,7 @@ void enigma()
         int numeroAleatorio = rand() % 100 + 1;
         if (numeroAleatorio % 3 == 2)
         {
-            segredo[i] = 'C';
+            segredo[i] = 'J';
         }
         else if (numeroAleatorio % 3 == 1)
         {
@@ -42,37 +42,35 @@ void mostrarEnigma()
     {
         if (segredo[i] == 'A')
         {
-            azul();
-            sleep_ms(500);
-            apagar();
-            sleep_ms(500);
+            azul(500);
+            apagar(500);
+            printf("A");
         }
         else if (segredo[i] == 'B')
         {
-            amarelo();
-            sleep_ms(500);
-            apagar();
-            sleep_ms(500);
+            amarelo(500);
+            apagar(500);
+            printf("B");
         }
-        else if (segredo[i] == 'C')
+        else if (segredo[i] == 'J')
         {
-            rosa();
-            sleep_ms(500);
-            apagar();
-            sleep_ms(500);
+            rosa(500);
+            apagar(500);
+            printf("J");
         }
     }
     gpio_put(BUZZER_A, 1);
     gpio_put(BUZZER_B, 1);
-    branco();   
-    sleep_ms(1000);
+    branco(1000);
     gpio_put(BUZZER_A, 0);
     gpio_put(BUZZER_B, 0);
-    apagar();
+    apagar(0);
+    printf("\n");
 }
 
 int main()
 {
+    printf("Iniciando...\n");
     stdio_init_all();
     iniciaComponentes();
 
@@ -91,57 +89,50 @@ int main()
             char botao = '\0';
             if (gpio_get(BUTTON_A) == 0)
             {
-                // gpio_put(LED_B, 1);
-                azul();
+                azul(300);
                 botao = 'A';
-                sleep_ms(300);
-                apagar();
-                sleep_ms(300);
+                apagar(300);
             }
             else if (gpio_get(BUTTON_B) == 0)
             {
-                amarelo();
+                amarelo(300);
                 botao = 'B';
-                sleep_ms(300);
-                apagar();
-                sleep_ms(300);
+                apagar(300);
             }
             else if (gpio_get(BUTTON_J) == 0)
             {
-                rosa();
-                botao = 'C';
-                sleep_ms(300);
-                apagar();
-                sleep_ms(300);
+                rosa(300);
+                botao = 'J';
+                apagar(300);
             }
             if (botao != '\0')
             {
                 if (botao == segredo[i])
                 {
-                    /* gpio_put(LED_G, 1);
-                    sleep_ms(200);       CONFIRMAÇÃO DE BOTÃO CERTO COM LED VERDE
-                    gpio_put(LED_G, 0);*/
+                    sleep_ms(200);
+                    gpio_put(LED_G, 0);
+
                     i++;
                     if (i == tamanho)
                     {
+                        printf("Parabéns, você acertou!\n");
                         for (int x = 0; x < 10; x++)
                         {
-                            verde();
-                            sleep_ms(200);
-                            apagar();
-                            sleep_ms(200);
+                            verde(200);
+
+                            apagar(200);
                         }
                     }
                 }
                 else
                 {
+                    printf("Você errou!\n");
                     for (int x = 0; x < 10; x++)
                     {
-                        vermelho();
-                        sleep_ms(200);
-                        gpio_put(LED_R, 0);
-                        apagar();
+                        vermelho(200);
+                        apagar(200);
                     }
+                    system("cls");
                     acerto = false;
                     tamanho = 0;
                 }
